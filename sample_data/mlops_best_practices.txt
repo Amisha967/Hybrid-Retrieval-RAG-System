@@ -1,0 +1,16 @@
+# MLOps & Production Machine Learning Pipeline Standards
+
+MLOps (Machine Learning Operations) standardizes and automates the continuous integration (CI), continuous delivery (CD), and continuous training (CT) of machine learning systems.
+
+## Data Versioning & Feature Stores
+- Feature Store Architecture: A centralized repository providing unified feature definitions, point-in-time correct historical joins for training (preventing data leakage), and low-latency key-value lookups (<10ms) for real-time online inference.
+- Data Lineage & Provenance: Tracking immutable dataset snapshots using tools like DVC or LakeFS, recording data checksums, preprocessing transformations, and schema validation rules.
+
+## Model Registry & Governance
+- Artifact Versioning: Every trained model must be packaged with explicit environment dependencies (Conda lockfile/Docker image digest), hyperparameters, training dataset hash, and evaluation metric benchmark cards.
+- Promotion Lifecycle: Models progress from Development -> Staging (Shadow/Canary deployment) -> Production (A/B testing) with automated regression guardrails.
+
+## Production Monitoring & Drift Detection
+1. Data Drift: Statistical deviation between the inference input feature distribution and the baseline training feature distribution, measured using Population Stability Index (PSI), Kolmogorov-Smirnov (KS) tests, or Wasserstein Distance.
+2. Concept Drift: Decay in the relationship between input features and target labels ($P(Y|X)$ shifts), requiring automated trigger-based model retraining workflows.
+3. Latency SLIs/SLOs: Real-time tracking of p50, p95, and p99 inference latencies, ensuring SLA compliance under dynamic traffic spikes.

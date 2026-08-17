@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: rag_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - CHROMA_PERSIST_DIRECTORY=/app/data/chroma_db
+      - BM25_PERSIST_PATH=/app/data/bm25_index.pkl
+      - EMBEDDING_MODEL_NAME=sentence-transformers/all-MiniLM-L6-v2
+      - RERANKER_MODEL_NAME=cross-encoder/ms-marco-MiniLM-L-6-v2
+      - LLM_PROVIDER=local_extractive
+    volumes:
+      - rag_data:/app/data
+    restart: unless-stopped
+    networks:
+      - rag_network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: rag_frontend
+    ports:
+      - "8501:8501"
+    environment:
+      - BACKEND_URL=http://backend:8000
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - rag_network
+
+volumes:
+  rag_data:
+
+networks:
+  rag_network:
+    driver: bridge

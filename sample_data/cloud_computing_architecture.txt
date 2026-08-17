@@ -1,0 +1,19 @@
+# Enterprise Cloud Computing Architecture
+
+Cloud computing architecture encompasses the components and sub-components required for enterprise cloud computing. These components typically consist of a front-end platform, back-end platforms, a cloud-based delivery model, and a network.
+
+## Core Architectural Pillars
+
+1. Operational Excellence: The ability to support development and run workloads effectively, gain insight into their operations, and continuously improve supporting processes and procedures. Key practices include infrastructure as code (IaC), automated testing, and continuous observability.
+
+2. Security & Compliance: Protecting information, systems, and assets while delivering business value through risk assessments and mitigation strategies. Core controls mandate zero-trust network policies, multi-factor authentication (MFA), least-privilege identity access management (IAM), and envelope encryption using KMS keys for data at rest and in transit.
+
+3. Reliability: Ensuring workloads perform intended functions correctly and consistently when expected. Key strategies include distributed multi-region deployments, automatic failover routing, cell-based architecture, rate limiting, and exponential backoff retry mechanisms.
+
+4. Performance Efficiency: The structured allocation of IT and computing resources. This involves selecting optimized instance families (compute-optimized, memory-optimized, or GPU-accelerated), serverless event-driven execution, and elastic auto-scaling policies triggered by CPU utilization and request queue depth.
+
+5. Cost Optimization: Avoiding unnecessary expenditure through continuous resource rightsizing, spot instance utilization for fault-tolerant batch workloads, reserved capacity commitments, and automated storage lifecycle policies transitioning cold objects from hot tiers to archive tiers.
+
+## Storage and Data Persistence Models
+
+Cloud environments categorize data into block storage, file storage, object storage, and managed relational/NoSQL databases. Object storage provides high durability (typically 99.999999999% or 11 nines) with RESTful API access, while block storage attaches directly to compute instances via high-throughput NVMe interfaces for low-latency database workloads.
